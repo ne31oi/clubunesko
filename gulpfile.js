@@ -136,14 +136,20 @@ gulp.task('browser-sync', function () {
 		notify: false
 	});
 });
+gulp.task('assets', function() {
+    gulp.src('./src/video/*.*')
+        .pipe(gulp.dest('./public/video/'));
+    gulp.src('./src/fonts/*.*')
+        .pipe(gulp.dest('./public/fonts/'));
 
+});
 /**
  * Task group for development
  * Группа задач для разработки
  */
 gulp.task('develop', function () {
 	runSequence('build-clean',
-		['sass', 'javascript', 'image-min', 'pug'],
+		['sass', 'javascript', 'image-min', 'pug', 'assets'],
 		'browser-sync');
 });
 
@@ -153,7 +159,7 @@ gulp.task('develop', function () {
  */
 gulp.task('build-dist', function () {
 	runSequence('build-clean',
-		['sass', 'javascript', 'image-min', 'pug']);
+		['sass', 'javascript', 'image-min', 'pug', 'assets']);
 });
 
 /**
